@@ -19,7 +19,7 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/task",taskRoutes);
 
-app.get("/", protect, (req, res) =>{
+app.get("/", (req, res) =>{
     res.send("API is running");
 });
 
