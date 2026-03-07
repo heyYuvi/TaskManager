@@ -26,7 +26,9 @@ const Login = () => {
         alert(message);
 
         setForm({ email: "", password: ""});
-        navigate('/dashboard')
+        console.log(token);
+
+        navigate('/dashboard');
         
         }catch(error){
             alert(error?.response?.data?.message || "Login Failed");
