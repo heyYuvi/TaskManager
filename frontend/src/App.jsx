@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import TaskPage from './pages/TaskPage';
 
 function App() {
 
@@ -17,6 +18,16 @@ function App() {
           <ProtectedRoutes>
             <Dashboard />
           </ProtectedRoutes>}></Route>
+        <Route path='/task/new' element={
+          <ProtectedRoutes>
+            <TaskPage />
+          </ProtectedRoutes>}>
+        </Route>
+        <Route path='/task/:id' element={
+          <ProtectedRoutes>
+            <TaskPage />
+          </ProtectedRoutes>
+        }></Route>
       </Routes>
     </BrowserRouter>
   )

@@ -1,12 +1,15 @@
-const TaskCard = ({ task, deleteTask,setEditingTask }) => {
+import { useNavigate } from 'react-router-dom';
 
-    return (
+const TaskCard = ({ task, deleteTask }) =>{
+    const navigate = useNavigate();
+
+    return(
         <div>
             <h3>{task.title}</h3>
             <p>{task.description}</p>
             <p>{task.status}</p>
-            <button onClick={() =>{setEditingTask(task)}}>Edit</button>
             <button onClick={() =>{deleteTask(task._id)}}>Delete</button>
+            <button onClick={() =>{navigate(`/task/${task._id}`)}}>Update</button>
         </div>
     )
 }

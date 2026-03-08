@@ -1,69 +1,57 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import API from '../api/axios.js';
 import SearchBar from '../components/SearchBar.jsx'
 import FilterButton from '../components/FilterButton.jsx';
 import TaskCard from '../components/TaskCard.jsx';
-import TaskForm from '../components/TaskForm.jsx';
-import LogOut from '../components/Logout.jsx';
+//import TaskForm from '../components/TaskForm.jsx';
+import Logout from '../components/Logout.jsx';
 
-const Dashboard = () =>{
+const Dashboard = () => {
+  const navigate = useNavigate();
+
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
-  const [editingTask, setEditingTask] = useState(null);
-  
+ 
 
-  const fetchTask = async () =>{
-    try{
-    const response = await API.get(`/task?search=${search}&status=${status}`);
-    setTasks(response.data);
-    }catch(error){
+  const fetchTasks = async () => {
+    try {
+      const response = await API.get(`/task?search=${search}&status=${status}`);
+      setTasks(response.data);
+    } catch (error) {
       console.log("Error fetching error", error);
     }
   }
 
-  const deleteTask = async (id) =>{
-    try{
-         await API.delete(`/task/${id}`);
-   fetchTask();
-    }catch(error){
-      console.log("Error Deleting errr", error);
+  const deleteTask = async (id) => {
+    try {
+      await API.delete(`/task/${id}`);
+      fetchTasks();
+    } catch (error) {
+      console.log("Error deleting error", error);
     }
   }
 
-  const updateTask = async (id, updatedData) =>{
-    try{
-       await API.put(`/task/${id}`, updatedData);
-       setEditingTask(null);
-    fetchTask();
-    }catch(error){
-      console.log("Error update error", error);
-    }
-  }
+  
 
-  const createTask = async (taskData) =>{
-     try{
-      await API.post("/task", taskData);
-      fetchTask();
-     }catch(error){
-      console.log("Error creating task error", error);
-     }
-
-  }
-
-  useEffect(() =>{
-    fetchTask();
+  useEffect(() => {
+    fetchTasks();
   }, [search, status]);
 
-  return(
+  return (
     <div>
-      <LogOut />
+      <Logout />
       <SearchBar search={search} setSearch={setSearch} />
-      
-      <TaskForm editingTask={editingTask} updateTask={updateTask} createTask={createTask} />
-      <FilterButton  setStatus={setStatus} />
 
-      {tasks.map((task) =>(<TaskCard  key={task._id} task={task} deleteTask={deleteTask} setEditingTask={setEditingTask} />))}
+      <FilterButton setStatus={setStatus} />
+
+      {tasks.length === 0 ? (
+        <p>No task found</p> ) : 
+        (
+          tasks.map((task) => (<TaskCard key={task._id} task={task} deleteTask={deleteTask} />))
+        )}
+      <button onClick={() =>{navigate('/task/new')}}>Add Task</button>
     </div>
   )
 }

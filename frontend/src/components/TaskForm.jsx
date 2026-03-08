@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
 
-const TaskForm = ({ editingTask, updateTask, createTask}) =>{
+const TaskForm = ({ editingTask, updateTask, createTask }) =>{
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("Pending");
@@ -18,10 +18,10 @@ const TaskForm = ({ editingTask, updateTask, createTask}) =>{
 
         if(editingTask){
             updateTask(editingTask._id, {
-            title,
-            description,
-            status
-        });
+                title,
+                description,
+                status
+            });
         }else{
             createTask({
                 title,
@@ -32,19 +32,18 @@ const TaskForm = ({ editingTask, updateTask, createTask}) =>{
 
         setTitle("");
         setDescription("");
-        setStatus("");
+        setStatus("Pending");
     }
-
     return(
         <form onSubmit={handleSubmit}>
-            <input type='text' value={title} onChange={(e) =>{setTitle(e.target.value)}} placeholder='Title'></input>
-            <textarea value={description} onChange={(e) =>{setDescription(e.target.value)}} placeholder='Description'></textarea>
+            <input type='text' value={title} onChange={(e) =>{setTitle(e.target.value)}} placeholder='Title' ></input>
+            <textarea value={description} onChange={(e) =>{setDescription(e.target.value)}} ></textarea>
             <select value={status} onChange={(e) =>{setStatus(e.target.value)}}>
                 <option value="Pending">Pending</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
             </select>
-            <button type='submit'>{editingTask ? "Update" : "Add"}</button>
+            <button type='submit'>{editingTask? "Update" : "Add"}</button>
         </form>
     )
 }
