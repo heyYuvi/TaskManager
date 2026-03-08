@@ -60,6 +60,19 @@ export const getTask = async (req, res) => {
     }
 }
 
+export const getTaskById = async (req, res) => {
+    try {
+        const task = await Task.findOne({
+            _id: req.params.id,
+            user: req.user._id
+        });
+
+        res.json(task);
+    } catch (error) {
+        res.status(500).json({ message: "Server Error" });
+    }
+}
+
 export const updateTask = async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
