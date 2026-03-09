@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import API from '../api/axios.js'
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         email: "",
@@ -38,11 +39,11 @@ const Login = () => {
     return (
         <div className='min-h-screen flex items-center justify-center bg-gray-100'>
 
-            <form onSubmit={handleSubmit} className='bg-white p-2 w-100 rounded-xl shadow-md'>
+            <form onSubmit={handleSubmit} className='bg-white p-6 w-96 rounded-xl shadow-md'>
                <h2 className='text-xl font-bold text-center mb-8'>Login</h2>
                 <input type='email' name='email' value={form.email} placeholder='Email' onChange={handleChange} required className='w-full border rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500'></input>
-                <input type='password' name='password' value={form.password} placeholder='Password' onChange={handleChange} className='w-full border rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500'></input>
-                <button type='submit' className='w-full text-white font-bold border p-3 rounded-lg bg-blue-500 hover:bg-blue-600 transition'>Login</button>
+                <input type='password' name='password' value={form.password} placeholder='Password' required onChange={handleChange} className='w-full border rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500'></input>
+                <button type='submit' className='w-full text-white font-bold  p-3 rounded-lg bg-blue-500 hover:bg-blue-600 transition'>Login</button>
                 <p className='text-center mt-4 text-sm'>Don't have an account
                     <Link to='/register' className='text-blue-500 font-semibold hover:underline ml-1'>Register</Link>
                 </p>
