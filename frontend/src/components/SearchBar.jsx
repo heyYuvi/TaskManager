@@ -1,12 +1,13 @@
-const SearchBar = ({search, setSearch}) =>{
+const SearchBar = ({search, setSearch, className}) =>{
 
     return(
         <input type="text"
         value={search}
         placeholder="Search"
         onChange={(e) =>{
-            setSearch(e.target.value)
+            setSearch(e.target.value);
         }}
+        className={className}
         />
     );
 };
