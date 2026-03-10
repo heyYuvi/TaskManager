@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
- 
+
 
   const fetchTasks = async () => {
     try {
@@ -33,25 +33,32 @@ const Dashboard = () => {
     }
   }
 
-  
+
 
   useEffect(() => {
     fetchTasks();
   }, [search, status]);
 
   return (
-    <div>
-      <Logout />
-      <SearchBar search={search} setSearch={setSearch} />
+    <div className='w-full max-w-[1440px] m-auto min-h-screen flex flex-col bg-gray-200'>
+      <div className='flex justify-between mt-6 p-6'>
+        <h4 className='font-bold text-4xl cursor-pointer hover:text-gray-600 tranisition'>Task Manager</h4><Logout className="font-bold border p-2 rounded-lg bg-red-600 text-white hover:bg-red-800 cursor-pointer transition"/>
+      </div>
+      <div className="flex justify-between p-6 items-center">
 
-      <FilterButton setStatus={setStatus} />
+        <SearchBar search={search} setSearch={setSearch} className="border p-3 rounded-md w-70 focus:outline-none focus:ring-2 focus:ring-blue-400 md:w-200 "/>
+
+        <FilterButton setStatus={setStatus} />
+
+        <button onClick={() => { navigate('/task/new') }} className="bg-green-700 font-bold text-4xl text-white w-10 h-10 rounded-full cursor-pointer">+</button>
+      </div>
 
       {tasks.length === 0 ? (
-        <p>No task found</p> ) : 
+        <p>No task found</p>) :
         (
           tasks.map((task) => (<TaskCard key={task._id} task={task} deleteTask={deleteTask} />))
         )}
-      <button onClick={() =>{navigate('/task/new')}}>Add Task</button>
+
     </div>
   )
 }
