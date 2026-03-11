@@ -40,7 +40,7 @@ const Dashboard = () => {
   }, [search, status]);
 
   return (
-    <div className='w-full max-w-[1440px] m-auto min-h-screen flex flex-col bg-gray-200'>
+    <div className='w-full max-w-360 m-auto min-h-screen flex flex-col bg-gray-200'>
       <div className='flex justify-between mt-6 p-6'>
         <h4 className='font-bold text-4xl cursor-pointer hover:text-gray-600 tranisition'>Task Manager</h4><Logout className="font-bold border p-2 rounded-lg bg-red-600 text-white hover:bg-red-800 cursor-pointer transition"/>
       </div>

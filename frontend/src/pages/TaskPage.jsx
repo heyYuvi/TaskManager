@@ -41,16 +41,22 @@ const TaskPage = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} placeholder='Title'></input>
-            <textarea value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder='Description'></textarea>
-            <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
-                <option value='Pending'>Pending</option>
-                <option value='In Progress'>In Progress</option>
-                <option value='Completed'>Completed</option>
-            </select>
-            <button type='submit'>{id ? "Update" : "Add Task"}</button>
-        </form>
+        <div className="flex flex-col items-center justify-center h-screen mt-10">
+            <h3 className='font-bold text-3xl '>Add/Update Task</h3>
+            <form onSubmit={handleSubmit} className="w-96 m-auto bg-gray-200 shadow-md hover:shadow-lg mt-10 rounded-md">
+                <div className='flex flex-col p-4 items-center justify-center'>
+                    <input type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} placeholder='Title' className='w-full border p-3 mt-6 rounded-md mb-6'></input>
+                        <textarea value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder='Description' className='w-full border p-3 rounded-md mb-3'></textarea>
+                        <label className='self-start font-medium mt-1'>Status</label>
+                        <select value={status} onChange={(e) => { setStatus(e.target.value) }} className='w-full font-bold border p-3 mt-2 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400'>
+                            <option value='Pending'>Pending</option>
+                            <option value='In Progress'>In Progress</option>
+                            <option value='Completed'>Completed</option>
+                        </select>
+                         <button type='submit' className='bg-green-400 p-3 rounded-md mt-4 font-bold text-white hover:bg-green-600 transition'>{id ? "Update" : "Add Task"}</button>
+                </div>
+            </form>
+        </div>
     )
 }
 
